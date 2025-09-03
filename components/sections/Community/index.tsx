@@ -21,7 +21,7 @@ const CommunitySection = () => {
 
   const stats = [
     { value: "94%", label: "of women say they want to feel safer dating" },
-    { value: "2k+", label: "waitlist sign up" },
+    { value: "2k+", label: "waitlist sign ups" },
   ];
 
   return (
