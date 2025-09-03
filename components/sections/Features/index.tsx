@@ -104,7 +104,6 @@ const FeaturesSection = () => {
               iconColor={feature.iconColor}
               title={feature.title}
               description={feature.description}
-              comingSoon={feature.comingSoon}
               variant="small"
             />
           ))}
