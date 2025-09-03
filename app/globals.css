@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --him-purple-dark: 113 69 116;
+    --him-purple-medium: 250 207 253;
+    --him-purple-light: 252 230 255;
+    --him-orange-light: 255 224 211;
+    --him-peach: 253 236 229;
+  }
+  
+  body {
+    @apply bg-him-peach;
+    color: #2F251D; /* him-text-primary */
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+}
