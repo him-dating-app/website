@@ -1,6 +1,6 @@
 # Him? Landing Page
 
-A production-ready Next.js 14 landing page for Him? - a safe space for women to share, support, and look out for one another in dating.
+A production-ready Next.js 14 landing page for Him? - a safe space for women to share, support, and look out for one another while dating.
 
 ## Tech Stack
 

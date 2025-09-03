@@ -21,7 +21,7 @@ const HeroSection = () => {
           {/* Content */}
           <div className="mb-12 lg:mb-0">
             <h1 className="font-montserrat font-bold text-him-purple-dark text-4xl md:text-5xl lg:text-6xl leading-tight mb-6">
-              A safe space for women to share, support, and look out for one another in dating
+              A safe space for women to share, support, and look out for one another while dating
             </h1>
             <p className="font-inter font-medium text-him-purple-dark text-lg md:text-xl opacity-80 mb-8 leading-relaxed">
               Join a trusted community built for women. Share real experiences, get alerts about potential dates, and connect with others who prioritise safety.

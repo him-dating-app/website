@@ -12,7 +12,7 @@ const Footer = () => {
             HIM?
           </div>
           <p className="font-inter font-medium text-him-peach opacity-80 text-sm">
-            A safe space for women to share, support, and look out for one another in dating.
+            A safe space for women to share, support, and look out for one another while dating.
           </p>
         </div>
 
