@@ -47,7 +47,7 @@ export default function CommunityGuidelinesPage() {
               Him? Community Guidelines
             </h1>
             <p className="font-['Inter:Medium',_sans-serif] font-medium text-[#714574] opacity-70">
-              Effective Date: [Insert Date]
+              Effective Date: September 2025
             </p>
           </div>
 
@@ -93,7 +93,7 @@ export default function CommunityGuidelinesPage() {
               <section>
                 <h2 className="font-['Inter:Semi_Bold',_sans-serif] font-semibold text-[#714574] text-xl mb-4 flex items-center gap-2">
                   <Eye className="w-5 h-5 text-blue-600" />
-                  3. Protect Privacy — Yours and Others'
+                  3. Protect Privacy, Yours and Others'
                 </h2>
                 <div className="space-y-3">
                   <p>• Do not post personal contact details (addresses, phone numbers, emails, social media handles).</p>
@@ -120,7 +120,7 @@ export default function CommunityGuidelinesPage() {
                   5. Responsible Sharing
                 </h2>
                 <div className="space-y-3">
-                  <p>• Posts should focus on dating safety and experiences — not revenge, shaming, or gossip.</p>
+                  <p>• Posts should focus on dating safety and experiences, not revenge, shaming, or gossip.</p>
                   <p>• Think before you post: would sharing this help the community stay safer?</p>
                   <p>• Avoid sensational, inflammatory, or exaggerated claims.</p>
                 </div>
@@ -168,7 +168,7 @@ export default function CommunityGuidelinesPage() {
                 </h2>
                 <div className="space-y-3">
                   <p>Him? is a space by women, for women. Keep our community safe, supportive, and focused on our core purpose: sharing experiences to protect each other.</p>
-                  <p><strong>Violations undermine trust and safety — help us by upholding these rules.</strong></p>
+                  <p><strong>Violations undermine trust and safety, help us by upholding these rules.</strong></p>
                 </div>
               </div>
 
@@ -237,7 +237,7 @@ export default function CommunityGuidelinesPage() {
                       <span className="text-[#fdece5] text-sm">@</span>
                     </div>
                     <div>
-                      <p className="text-sm">Community support: [community@himdating.com]</p>
+                      <p className="text-sm">Community support: [community@talkabouthim.uk]</p>
                       <p className="text-xs opacity-70">For general questions about guidelines</p>
                     </div>
                   </div>
@@ -246,7 +246,7 @@ export default function CommunityGuidelinesPage() {
                       <Shield className="w-4 h-4 text-[#fdece5]" />
                     </div>
                     <div>
-                      <p className="text-sm">Legal matters: [legal@himdating.com]</p>
+                      <p className="text-sm">Legal matters: [legal@talkabouthim.uk]</p>
                       <p className="text-xs opacity-70">For defamation notices and legal concerns</p>
                     </div>
                   </div>
@@ -259,7 +259,7 @@ export default function CommunityGuidelinesPage() {
           <div className="mt-12 pt-8 border-t border-[#714574]/20">
             <div className="flex flex-col sm:flex-row gap-4 justify-between items-center">
               <div className="text-sm text-[#714574] opacity-70">
-                Last updated: [Insert Date] • Version 1.0
+                Last updated: September 2025 • Version 1.0
               </div>
               <div className="flex gap-3">
                 <Button variant="outline" className="text-[#714574] border-[#714574] hover:bg-[#FFE0D3]">

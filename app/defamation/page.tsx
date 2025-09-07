@@ -54,12 +54,12 @@ export default function DefamationPolicyPage() {
           {/* Content */}
           <div className="prose prose-lg max-w-none">
             <div className="font-['Inter:Medium',_sans-serif] font-medium text-[#714574] leading-relaxed space-y-8">
-
-              <div className="bg-[#FFE0D3] rounded-2xl p-6 border border-[#714574]/20">
+            <section>
                 <h2 className="font-['Inter:Semi_Bold',_sans-serif] font-semibold text-[#714574] text-xl mb-4 flex items-center gap-2">
                   <FileText className="w-5 h-5" />
                   1. Purpose and scope
                 </h2>
+              <div className="bg-[#FFE0D3] rounded-2xl p-6 border border-[#714574]/20">
                 <p>
                   This Policy implements Defamation Act 2013 s.5 and the Defamation (Operators of Websites) Regulations 2013 for statements posted by users on the Him? Platform.
                 </p>
@@ -68,6 +68,7 @@ export default function DefamationPolicyPage() {
                   <a href="https://legislation.gov.uk" className="text-[#714574] underline hover:no-underline">Legislation.gov.uk</a>
                 </div>
               </div>
+              </section>
 
               <section>
                 <h2 className="font-['Inter:Semi_Bold',_sans-serif] font-semibold text-[#714574] text-xl mb-4 flex items-center gap-2">
@@ -75,7 +76,7 @@ export default function DefamationPolicyPage() {
                   2. Submitting a "Notice of Complaint"
                 </h2>
                 <p className="mb-4">
-                  To complain about allegedly defamatory User Content, send an email to <strong>[legal@himdating.com]</strong> with subject <strong>"Defamation Notice"</strong>, including all of:
+                  To complain about allegedly defamatory User Content, send an email to <strong>[legal@talkabouthim.uk]</strong> with subject <strong>"Defamation Notice"</strong>, including all of:
                 </p>
 
                 <div className="bg-[#e4c5ee] rounded-2xl p-6 border border-[#714574]/20">
@@ -218,7 +219,7 @@ export default function DefamationPolicyPage() {
                       <Mail className="w-4 h-4 text-[#fdece5]" />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold">Email: [legal@himdating.com]</p>
+                      <p className="text-sm font-semibold">Email: [legal@talkabouthim.uk]</p>
                       <p className="text-xs opacity-70">Subject: "Defamation Notice"</p>
                     </div>
                   </div>
@@ -251,7 +252,7 @@ export default function DefamationPolicyPage() {
                 <div className="space-y-3 text-sm">
                   <p>This policy is designed to comply with UK law, specifically the Defamation Act 2013 and related regulations.</p>
                   <p>Him? operates as a hosting provider under the Electronic Commerce (EC Directive) Regulations 2002 and may benefit from safe harbour protections when following this process.</p>
-                  <p>For urgent legal matters or court orders, contact [legal@himdating.com] immediately with "URGENT LEGAL" in the subject line.</p>
+                  <p>For urgent legal matters or court orders, contact [legal@talkabouthim.uk] immediately with "URGENT LEGAL" in the subject line.</p>
                 </div>
               </div>
             </div>
@@ -261,7 +262,7 @@ export default function DefamationPolicyPage() {
           <div className="mt-12 pt-8 border-t border-[#714574]/20">
             <div className="flex flex-col sm:flex-row gap-4 justify-between items-center">
               <div className="text-sm text-[#714574] opacity-70">
-                Last updated: [Insert Date] • UK Defamation Act 2013 Compliant
+                Last updated: September 2025 • UK Defamation Act 2013 Compliant
               </div>
               <div className="flex gap-3">
                 <Button 

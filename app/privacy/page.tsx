@@ -47,7 +47,7 @@ export default function PrivacyPolicyPage() {
               Him? Privacy Policy
             </h1>
             <p className="font-['Inter:Medium',_sans-serif] font-medium text-[#714574] opacity-70">
-              Effective date: [●]
+              Effective date: September 2025
             </p>
           </div>
 
@@ -55,7 +55,7 @@ export default function PrivacyPolicyPage() {
           <div className="prose prose-lg max-w-none">
             <div className="font-['Inter:Medium',_sans-serif] font-medium text-[#714574] leading-relaxed space-y-6">
               <p>
-                <strong>Controller:</strong> Him Dating App Ltd, [address], [email]. For privacy queries contact [privacy@…]. If appointed, our DPO can be reached at [dpo@…].
+                <strong>Controller:</strong> Him Dating App Ltd.
               </p>
 
               <div className="bg-[#FFE0D3] rounded-2xl p-6 border border-[#714574]/20">
@@ -81,10 +81,6 @@ export default function PrivacyPolicyPage() {
                   </div>
                   <div>
                     <p><strong>Identity verification (if enabled):</strong> we use a third‑party ID verification vendor; we receive a pass/fail token and minimal metadata. We do not store raw ID images unless required and then for the shortest possible period.</p>
-                    <div className="flex items-center gap-2 text-sm opacity-70 mt-2">
-                      <span>Reference:</span>
-                      <a href="https://www.bbc.co.uk/news" className="text-[#714574] underline hover:no-underline">BBC News Feeds</a>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -124,7 +120,7 @@ export default function PrivacyPolicyPage() {
                     4. Sharing
                   </h2>
                   <div className="space-y-3">
-                    <p><strong>Processors:</strong> Supabase (hosting), cloud infrastructure providers, analytics, IDV vendor, email provider—only as necessary under DPAs.</p>
+                    <p><strong>Processors:</strong> Supabase (hosting), cloud infrastructure providers, analytics, IDV vendor, email provider, only as necessary under DPAs.</p>
                     <p><strong>Authorities:</strong> IWF, police, courts when legally required.</p>
                     <p><strong>No sale of personal data.</strong></p>
                   </div>
@@ -259,16 +255,16 @@ export default function PrivacyPolicyPage() {
                       <span className="text-[#fdece5] text-sm">@</span>
                     </div>
                     <div>
-                      <p className="text-sm">Privacy queries: [privacy@himdating.com]</p>
+                      <p className="text-sm">Privacy queries: [privacy@talkabouthim.uk]</p>
                       <p className="text-xs opacity-70">General privacy questions and requests</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
+                  {/* <div className="flex items-center gap-3">
                     <div className="w-8 h-8 bg-[#714574] rounded-full flex items-center justify-center">
                       <Shield className="w-4 h-4 text-[#fdece5]" />
                     </div>
                     <div>
-                      <p className="text-sm">Data Protection Officer: [dpo@himdating.com]</p>
+                      <p className="text-sm">Data Protection Officer: [dpo@talkabouthim.uk]</p>
                       <p className="text-xs opacity-70">For formal data protection matters</p>
                     </div>
                   </div>
@@ -280,7 +276,7 @@ export default function PrivacyPolicyPage() {
                       <p className="text-sm">ICO Registration: [Registration Number]</p>
                       <p className="text-xs opacity-70">Registered with the UK Information Commissioner's Office</p>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -290,7 +286,7 @@ export default function PrivacyPolicyPage() {
           <div className="mt-12 pt-8 border-t border-[#714574]/20">
             <div className="flex flex-col sm:flex-row gap-4 justify-between items-center">
               <div className="text-sm text-[#714574] opacity-70">
-                Last updated: [●] • Version 1.0 • UK GDPR Compliant
+                Last updated: September 2025 • Version 1.0 • UK GDPR Compliant
               </div>
               <div className="flex gap-3">
                 <Button variant="outline" className="text-[#714574] border-[#714574] hover:bg-[#FFE0D3]">

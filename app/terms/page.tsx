@@ -55,7 +55,7 @@ export default function TermsOfServicePage() {
           <div className="prose prose-lg max-w-none">
             <div className="font-['Inter:Medium',_sans-serif] font-medium text-[#714574] leading-relaxed space-y-6">
               <p>
-                <strong>Operator:</strong> Him Dating App Ltd (England & Wales, no. [●]) of [registered address] ("Him?", "we", "us"). These Terms form a binding agreement with any person who uses the Him? website, mobile application and related services (collectively, the "Platform"). If you do not agree, do not use the Platform.
+                <strong>Operator:</strong> Him Dating App Ltd ("Him?", "we", "us"). These Terms form a binding agreement with any person who uses the Him? website, mobile application and related services (collectively, the "Platform"). If you do not agree, do not use the Platform.
               </p>
 
               <div className="bg-[#FFE0D3] rounded-2xl p-6 border border-[#714574]/20">
@@ -109,8 +109,6 @@ export default function TermsOfServicePage() {
                     <div className="flex items-center gap-2 text-sm opacity-70">
                       <span>Reference:</span>
                       <a href="https://legislation.gov.uk" className="text-[#714574] underline hover:no-underline">Legislation.gov.uk</a>
-                      <span>•</span>
-                      <a href="https://www.ofcom.org.uk" className="text-[#714574] underline hover:no-underline">www.ofcom.org.uk</a>
                     </div>
                   </div>
                 </section>
@@ -152,7 +150,7 @@ export default function TermsOfServicePage() {
                   </h2>
                   <div className="space-y-4">
                     <p>
-                      <strong>(a)</strong> Him? is an "operator of a website" within Defamation Act 2013 s.5. If you believe User Content defames you, please use our Defamation Notice Procedure (Schedule 1). Provided we did not post the statement and we comply with that procedure—including contacting the poster and acting within statutory time limits—we may rely on the operator's defence. We may remove content in our discretion without any admission of liability.
+                      <strong>(a)</strong> Him? is an "operator of a website" within Defamation Act 2013 s.5. If you believe User Content defames you, please use our Defamation Notice Procedure (Schedule 1). Provided we did not post the statement and we comply with that procedure, including contacting the poster and acting within statutory time limits—we may rely on the operator's defence. We may remove content in our discretion without any admission of liability.
                     </p>
                     <p>
                       <strong>(b)</strong> Nothing in this clause prevents us from removing content sooner if it appears unlawful or egregiously harmful.
@@ -275,7 +273,7 @@ export default function TermsOfServicePage() {
           <div className="mt-12 pt-8 border-t border-[#714574]/20">
             <div className="flex flex-col sm:flex-row gap-4 justify-between items-center">
               <div className="text-sm text-[#714574] opacity-70">
-                Last updated: [●] • Version 1.0
+                Last updated: September 2025 • Version 1.0
               </div>
               <div className="flex gap-3">
                 <Button variant="outline" className="text-[#714574] border-[#714574] hover:bg-[#FFE0D3]">

@@ -54,16 +54,17 @@ export default function RefundPolicyPage() {
           {/* Content */}
           <div className="prose prose-lg max-w-none">
             <div className="font-['Inter:Medium',_sans-serif] font-medium text-[#714574] leading-relaxed space-y-8">
-
-              <div className="bg-[#FFE0D3] rounded-2xl p-6 border border-[#714574]/20">
+              <section>
                 <h2 className="font-['Inter:Semi_Bold',_sans-serif] font-semibold text-[#714574] text-xl mb-4 flex items-center gap-2">
                   <Smartphone className="w-5 h-5" />
                   1. Where purchases occur
                 </h2>
+              <div className="bg-[#FFE0D3] rounded-2xl p-6 border border-[#714574]/20">
                 <p>
                   All purchases are via Apple App Store or Google Play. Those platforms' terms govern billing, renewal, and refunds.
                 </p>
               </div>
+              </section>
 
               <section>
                 <h2 className="font-['Inter:Semi_Bold',_sans-serif] font-semibold text-[#714574] text-xl mb-4 flex items-center gap-2">
@@ -169,7 +170,7 @@ export default function RefundPolicyPage() {
                   5. Contact
                 </h2>
                 <p className="mb-4">
-                  [support@himdating.com] for help accessing features; we will assist you with store processes.
+                  [support@talkabouthim.uk] for help accessing features; we will assist you with store processes.
                 </p>
               </section>
 
@@ -260,7 +261,7 @@ export default function RefundPolicyPage() {
                   
                   <div className="bg-white rounded-xl p-4 border border-[#714574]/10">
                     <h4 className="font-semibold text-[#714574] mb-2">Q: How do I get help with billing issues?</h4>
-                    <p className="text-sm">A: Contact [support@himdating.com] and we'll guide you through the store's refund process.</p>
+                    <p className="text-sm">A: Contact [support@talkabouthim.uk] and we'll guide you through the store's refund process.</p>
                   </div>
                   
                   <div className="bg-white rounded-xl p-4 border border-[#714574]/10">
@@ -281,7 +282,7 @@ export default function RefundPolicyPage() {
                       <span className="text-[#fdece5] text-sm">@</span>
                     </div>
                     <div>
-                      <p className="text-sm font-semibold">Email: [support@himdating.com]</p>
+                      <p className="text-sm font-semibold">Email: [support@talkabouthim.uk]</p>
                       <p className="text-xs opacity-70">We'll help you navigate the store refund process</p>
                     </div>
                   </div>
@@ -303,7 +304,7 @@ export default function RefundPolicyPage() {
           <div className="mt-12 pt-8 border-t border-[#714574]/20">
             <div className="flex flex-col sm:flex-row gap-4 justify-between items-center">
               <div className="text-sm text-[#714574] opacity-70">
-                Last updated: [Insert Date] • App Store Policy Compliant
+                Last updated: September 2025 • App Store Policy Compliant
               </div>
               <div className="flex gap-3">
                 <Button variant="outline" className="text-[#714574] border-[#714574] hover:bg-[#FFE0D3]">

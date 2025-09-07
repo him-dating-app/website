@@ -60,17 +60,17 @@ const HeroSection = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-him-purple-dark/20 to-transparent" />
             </div>
 
-            {/* Floating stats card */}
-            <div className="absolute -bottom-6 -left-6 bg-him-orange-light rounded-2xl border border-him-purple-dark shadow-him-md p-4 animate-float">
+            {/* Floating stats card - adjusted for mobile */}
+            <div className="absolute bottom-4 left-4 md:-bottom-6 md:-left-6 bg-him-orange-light rounded-2xl border border-him-purple-dark shadow-him-md p-3 md:p-4 animate-float">
               <div className="text-center">
-                <div className="font-montserrat font-bold text-him-purple-dark text-2xl">Join Now!</div>
+                <div className="font-montserrat font-bold text-him-purple-dark text-xl md:text-2xl">Join Now!</div>
                 {/* <div className="font-inter font-medium text-him-purple-dark text-sm">Women Protected</div> */}
               </div>
             </div>
 
-            {/* Phone mockup overlay */}
-            <div className="absolute -top-4 -right-4 bg-him-purple-medium rounded-2xl border border-him-purple-dark shadow-him-sm p-3 rotate-12 opacity-90">
-              <div className="bg-him-peach rounded-xl p-2 w-16 h-24">
+            {/* Phone mockup overlay - adjusted for mobile */}
+            <div className="absolute top-4 right-4 md:-top-4 md:-right-4 bg-him-purple-medium rounded-2xl border border-him-purple-dark shadow-him-sm p-2 md:p-3 rotate-12 opacity-90">
+              <div className="bg-him-peach rounded-xl p-2 w-14 h-20 md:w-16 md:h-24">
                 <div className="bg-him-purple-dark rounded-full w-2 h-2 mx-auto mb-1 opacity-30" />
                 <div className="space-y-1">
                   <div className="bg-him-purple-dark h-1 w-full rounded opacity-20" />
