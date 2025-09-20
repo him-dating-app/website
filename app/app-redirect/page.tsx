@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Container } from '@/components/ui/Container';
@@ -27,7 +27,7 @@ const APP_ACTIONS = {
   }
 } as const;
 
-export default function AppRedirectPage() {
+function AppRedirectContent() {
   const searchParams = useSearchParams();
   const action = searchParams.get('action') as keyof typeof APP_ACTIONS | null;
   const [loading, setLoading] = useState(true);
@@ -185,5 +185,33 @@ export default function AppRedirectPage() {
         </div>
       </Container>
     </main>
+  );
+}
+
+function LoadingFallback() {
+  return (
+    <main className="min-h-screen bg-him-peach py-16">
+      <Container>
+        <div className="max-w-2xl mx-auto text-center">
+          <div className="bg-white rounded-3xl p-8 shadow-lg border border-him-purple-dark">
+            <div className="text-6xl mb-6">⏳</div>
+            <h1 className="text-3xl font-bold text-him-purple-dark mb-4">
+              Loading...
+            </h1>
+            <p className="text-lg text-him-purple-dark/80">
+              Please wait while we prepare the redirect.
+            </p>
+          </div>
+        </div>
+      </Container>
+    </main>
+  );
+}
+
+export default function AppRedirectPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <AppRedirectContent />
+    </Suspense>
   );
 }

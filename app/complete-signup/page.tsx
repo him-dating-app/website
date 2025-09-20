@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 
-export default function CompleteSignupPage() {
+function CompleteSignupContent() {
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
   const [error, setError] = useState<string | null>(null);
@@ -191,5 +191,33 @@ export default function CompleteSignupPage() {
         </div>
       </Container>
     </main>
+  );
+}
+
+function LoadingFallback() {
+  return (
+    <main className="min-h-screen bg-him-peach py-16">
+      <Container>
+        <div className="max-w-2xl mx-auto text-center">
+          <div className="bg-white rounded-3xl p-8 shadow-lg border border-him-purple-dark">
+            <div className="text-6xl mb-6">⏳</div>
+            <h1 className="text-3xl font-bold text-him-purple-dark mb-4">
+              Loading...
+            </h1>
+            <p className="text-lg text-him-purple-dark/80">
+              Please wait while we prepare your account setup.
+            </p>
+          </div>
+        </div>
+      </Container>
+    </main>
+  );
+}
+
+export default function CompleteSignupPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <CompleteSignupContent />
+    </Suspense>
   );
 }
