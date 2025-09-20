@@ -47,7 +47,7 @@ export default function TermsOfServicePage() {
               Him? Terms of Use
             </h1>
             <p className="font-['Inter:Medium',_sans-serif] font-medium text-[#714574] opacity-70">
-              Effective date: [●]
+              Effective date: 1 September 2025
             </p>
           </div>
 

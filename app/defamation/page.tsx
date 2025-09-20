@@ -262,7 +262,7 @@ export default function DefamationPolicyPage() {
           <div className="mt-12 pt-8 border-t border-[#714574]/20">
             <div className="flex flex-col sm:flex-row gap-4 justify-between items-center">
               <div className="text-sm text-[#714574] opacity-70">
-                Last updated: September 2025 • UK Defamation Act 2013 Compliant
+                Last updated: 1 September 2025 • UK Defamation Act 2013 Compliant
               </div>
               <div className="flex gap-3">
                 <Button 
