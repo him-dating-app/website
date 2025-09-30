@@ -8,99 +8,64 @@ import { Button } from '@/components/ui/Button';
 
 function ResetPasswordContent() {
   const searchParams = useSearchParams();
-  const redirect = searchParams.get('redirect');
-  const errorParam = searchParams.get('error');
-  const errorMessage = searchParams.get('message');
-  const checkHash = searchParams.get('check_hash');
-  const tokenHash = searchParams.get('token_hash');
-  const success = searchParams.get('success');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [appUrl, setAppUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    // Handle redirect from API callback
-    if (redirect) {
-      const decodedUrl = decodeURIComponent(redirect);
-      console.log('Redirecting to app:', decodedUrl);
-
-      // Try to open the app
-      try {
-        const link = document.createElement('a');
-        link.href = decodedUrl;
-        link.style.display = 'none';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      } catch (e) {
-        console.warn('Failed to create app redirect link:', e);
-      }
-
-      // Show success message or fallback after delay
-      setTimeout(() => {
-        setLoading(false);
-      }, 2000);
-      return;
-    }
-
-    // Handle errors from API callback
-    if (errorParam) {
-      if (errorParam === 'expired') {
-        setError(errorMessage || 'This password reset link has expired. Please request a new one.');
-      } else if (errorParam === 'no_token') {
-        setError(errorMessage || 'No authentication token was provided. Please try requesting a new password reset.');
-      } else {
-        setError(errorMessage || 'Invalid reset link');
-      }
-      setLoading(false);
-      return;
-    }
-
-    // Handle client-side hash checking (fallback for when Supabase uses hash fragments)
-    if (checkHash && typeof window !== 'undefined') {
+    // ALWAYS check for hash fragments first (Supabase sends tokens this way)
+    if (typeof window !== 'undefined' && window.location.hash) {
       const hash = window.location.hash;
-      if (hash) {
-        const params = new URLSearchParams(hash.substring(1));
-        const accessToken = params.get('access_token');
-        const refreshToken = params.get('refresh_token');
+      console.log('Hash fragment found:', hash);
 
-        if (accessToken && refreshToken) {
-          // Redirect to app with tokens
-          const appUrl = `him://auth/resetpasswordconfirm?access_token=${encodeURIComponent(accessToken)}&refresh_token=${encodeURIComponent(refreshToken)}`;
-          window.location.href = `/reset-password?redirect=${encodeURIComponent(appUrl)}&success=true`;
-          return;
+      const params = new URLSearchParams(hash.substring(1));
+      const accessToken = params.get('access_token');
+      const refreshToken = params.get('refresh_token');
+      const type = params.get('type');
+
+      if (accessToken && refreshToken) {
+        console.log('Tokens found in hash, redirecting to app');
+        // Got tokens! Create deep link to app
+        const deepLink = `him://auth/resetpasswordconfirm?access_token=${encodeURIComponent(accessToken)}&refresh_token=${encodeURIComponent(refreshToken)}&type=${type || 'recovery'}`;
+        setAppUrl(deepLink);
+
+        // Try to open app immediately
+        try {
+          const link = document.createElement('a');
+          link.href = deepLink;
+          link.style.display = 'none';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        } catch (e) {
+          console.warn('Failed to create app redirect link:', e);
         }
+
+        // Show success state with fallback
+        setTimeout(() => setLoading(false), 2000);
+        return;
       }
-      setError('Unable to process reset link. Please try requesting a new one.');
+    }
+
+    // Check for error parameters from Supabase (when token is expired or invalid)
+    const errorCode = searchParams.get('error_code');
+    const errorDescription = searchParams.get('error_description');
+
+    if (errorCode) {
+      console.log('Error from Supabase:', errorCode, errorDescription);
+      if (errorCode === 'otp_expired') {
+        setError('This password reset link has expired. Please request a new one.');
+      } else {
+        setError(errorDescription || 'Invalid reset link. Please try requesting a new one.');
+      }
       setLoading(false);
       return;
     }
 
-    // Handle token_hash flow
-    if (tokenHash) {
-      const appUrl = `him://auth/resetpasswordconfirm?token_hash=${encodeURIComponent(tokenHash)}&type=recovery`;
-
-      try {
-        // Create a temporary link and click it (safer than window.location)
-        const link = document.createElement('a');
-        link.href = appUrl;
-        link.style.display = 'none';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      } catch (e) {
-        console.warn('Failed to create app redirect link:', e);
-      }
-
-      // Show fallback options after 2 seconds if still on page
-      setTimeout(() => {
-        setLoading(false);
-      }, 2000);
-      return;
-    }
-
-    // No parameters provided - show default state
+    // No tokens or errors - user might have navigated here directly
+    console.log('No tokens or errors found');
     setLoading(false);
-  }, [redirect, errorParam, errorMessage, checkHash, tokenHash, success]);
+  }, [searchParams]);
 
   if (error) {
     return (
@@ -110,13 +75,10 @@ function ResetPasswordContent() {
             <div className="bg-white rounded-3xl p-8 shadow-lg border border-him-purple-dark">
               <div className="text-6xl mb-6">⚠️</div>
               <h1 className="text-3xl font-bold text-him-purple-dark mb-4">
-                Invalid Reset Link
+                Reset Link Error
               </h1>
               <p className="text-lg text-him-purple-dark/80 mb-6">
                 {error}
-              </p>
-              <p className="text-him-purple-dark/70 mb-8">
-                This link may have expired or already been used. Password reset links are only valid for 1 hour.
               </p>
               <Link href="/request-new-link">
                 <Button variant="primary" className="mb-4">
@@ -161,41 +123,46 @@ function ResetPasswordContent() {
               <>
                 <div className="text-6xl mb-6">📱</div>
                 <h1 className="text-3xl font-bold text-him-purple-dark mb-4">
-                  Reset Your Password
+                  {appUrl ? 'Reset Your Password' : 'Password Reset'}
                 </h1>
                 <p className="text-lg text-him-purple-dark/80 mb-6">
-                  If the Him? app didn't open automatically, please follow these steps:
+                  {appUrl
+                    ? "If the Him? app didn't open automatically, please follow these steps:"
+                    : "To reset your password, please request a new reset link from the app."
+                  }
                 </p>
 
-                <div className="text-left bg-him-purple-light/20 rounded-2xl p-6 mb-6">
-                  <ol className="space-y-3 text-him-purple-dark">
-                    <li className="flex items-start">
-                      <span className="font-bold mr-3 text-him-purple-active">1.</span>
-                      <span>Make sure the Him? app is installed on your device</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="font-bold mr-3 text-him-purple-active">2.</span>
-                      <div>
-                        <span>Copy and paste this link in your browser:</span>
-                        <div className="mt-2 p-3 bg-white rounded-lg border border-him-purple-dark/20 font-mono text-sm break-all">
-                          {redirect ? decodeURIComponent(redirect) :
-                           tokenHash ? `him://auth/resetpasswordconfirm?token_hash=${tokenHash}&type=recovery` :
-                           'him://auth/resetpasswordconfirm'}
-                        </div>
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="font-bold mr-3 text-him-purple-active">3.</span>
-                      <span>Or download the Him? app below:</span>
-                    </li>
-                  </ol>
-                </div>
+                {appUrl && (
+                  <>
+                    <div className="text-left bg-him-purple-light/20 rounded-2xl p-6 mb-6">
+                      <ol className="space-y-3 text-him-purple-dark">
+                        <li className="flex items-start">
+                          <span className="font-bold mr-3 text-him-purple-active">1.</span>
+                          <span>Make sure the Him? app is installed on your device</span>
+                        </li>
+                        <li className="flex items-start">
+                          <span className="font-bold mr-3 text-him-purple-active">2.</span>
+                          <div>
+                            <span>Copy and paste this link in your browser:</span>
+                            <div className="mt-2 p-3 bg-white rounded-lg border border-him-purple-dark/20 font-mono text-sm break-all">
+                              {appUrl}
+                            </div>
+                          </div>
+                        </li>
+                        <li className="flex items-start">
+                          <span className="font-bold mr-3 text-him-purple-active">3.</span>
+                          <span>Or download the Him? app below:</span>
+                        </li>
+                      </ol>
+                    </div>
 
-                <div className="bg-yellow-50 border border-yellow-300 rounded-xl p-4 mb-6">
-                  <p className="text-sm text-yellow-800">
-                    <strong>⏰ Note:</strong> This password reset link expires in 1 hour for security reasons.
-                  </p>
-                </div>
+                    <div className="bg-yellow-50 border border-yellow-300 rounded-xl p-4 mb-6">
+                      <p className="text-sm text-yellow-800">
+                        <strong>⏰ Note:</strong> This password reset link expires in 1 hour for security reasons.
+                      </p>
+                    </div>
+                  </>
+                )}
 
                 <div className="space-y-4 mb-8">
                   <h3 className="text-xl font-semibold text-him-purple-dark">
