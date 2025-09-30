@@ -13,7 +13,32 @@ function ResetPasswordContent() {
   const [appUrl, setAppUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    // ALWAYS check for hash fragments first (Supabase sends tokens this way)
+    // Check for authorization code from Supabase PKCE flow (most common case)
+    const code = searchParams.get('code');
+    if (code) {
+      console.log('Authorization code found:', code);
+      // Create deep link with the code
+      const deepLink = `him://auth/resetpasswordconfirm?code=${encodeURIComponent(code)}`;
+      setAppUrl(deepLink);
+
+      // Try to open app immediately (same method as complete-signup)
+      try {
+        const link = document.createElement('a');
+        link.href = deepLink;
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } catch (e) {
+        console.warn('Failed to create app redirect link:', e);
+      }
+
+      // Show fallback UI after delay
+      setTimeout(() => setLoading(false), 2000);
+      return;
+    }
+
+    // ALWAYS check for hash fragments (older Supabase flow or direct tokens)
     if (typeof window !== 'undefined' && window.location.hash) {
       const hash = window.location.hash;
       console.log('Hash fragment found:', hash);
@@ -62,8 +87,8 @@ function ResetPasswordContent() {
       return;
     }
 
-    // No tokens or errors - user might have navigated here directly
-    console.log('No tokens or errors found');
+    // No tokens, code, or errors - user might have navigated here directly
+    console.log('No tokens, code, or errors found');
     setLoading(false);
   }, [searchParams]);
 
