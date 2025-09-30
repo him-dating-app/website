@@ -8,51 +8,99 @@ import { Button } from '@/components/ui/Button';
 
 function ResetPasswordContent() {
   const searchParams = useSearchParams();
-  const token = searchParams.get('token');
-  const type = searchParams.get('type');
+  const redirect = searchParams.get('redirect');
+  const errorParam = searchParams.get('error');
+  const errorMessage = searchParams.get('message');
+  const checkHash = searchParams.get('check_hash');
+  const tokenHash = searchParams.get('token_hash');
+  const success = searchParams.get('success');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!token) {
-      setError('No reset token provided');
+    // Handle redirect from API callback
+    if (redirect) {
+      const decodedUrl = decodeURIComponent(redirect);
+      console.log('Redirecting to app:', decodedUrl);
+
+      // Try to open the app
+      try {
+        const link = document.createElement('a');
+        link.href = decodedUrl;
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } catch (e) {
+        console.warn('Failed to create app redirect link:', e);
+      }
+
+      // Show success message or fallback after delay
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
+      return;
+    }
+
+    // Handle errors from API callback
+    if (errorParam) {
+      if (errorParam === 'expired') {
+        setError(errorMessage || 'This password reset link has expired. Please request a new one.');
+      } else if (errorParam === 'no_token') {
+        setError(errorMessage || 'No authentication token was provided. Please try requesting a new password reset.');
+      } else {
+        setError(errorMessage || 'Invalid reset link');
+      }
       setLoading(false);
       return;
     }
 
-    if (type !== 'recovery') {
-      setError('Invalid reset link type');
+    // Handle client-side hash checking (fallback for when Supabase uses hash fragments)
+    if (checkHash && typeof window !== 'undefined') {
+      const hash = window.location.hash;
+      if (hash) {
+        const params = new URLSearchParams(hash.substring(1));
+        const accessToken = params.get('access_token');
+        const refreshToken = params.get('refresh_token');
+
+        if (accessToken && refreshToken) {
+          // Redirect to app with tokens
+          const appUrl = `him://auth/resetpasswordconfirm?access_token=${encodeURIComponent(accessToken)}&refresh_token=${encodeURIComponent(refreshToken)}`;
+          window.location.href = `/reset-password?redirect=${encodeURIComponent(appUrl)}&success=true`;
+          return;
+        }
+      }
+      setError('Unable to process reset link. Please try requesting a new one.');
       setLoading(false);
       return;
     }
 
-    // Validate token format (should be alphanumeric with dashes/underscores)
-    if (!/^[A-Za-z0-9_-]+$/.test(token)) {
-      setError('Invalid token format');
-      setLoading(false);
+    // Handle token_hash flow
+    if (tokenHash) {
+      const appUrl = `him://auth/resetpasswordconfirm?token_hash=${encodeURIComponent(tokenHash)}&type=recovery`;
+
+      try {
+        // Create a temporary link and click it (safer than window.location)
+        const link = document.createElement('a');
+        link.href = appUrl;
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } catch (e) {
+        console.warn('Failed to create app redirect link:', e);
+      }
+
+      // Show fallback options after 2 seconds if still on page
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
       return;
     }
 
-    // Try to open the app with the reset token
-    const appUrl = `him://auth/resetpasswordconfirm?token=${encodeURIComponent(token)}&type=recovery`;
-
-    try {
-      // Create a temporary link and click it (safer than window.location)
-      const link = document.createElement('a');
-      link.href = appUrl;
-      link.style.display = 'none';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } catch (e) {
-      console.warn('Failed to create app redirect link:', e);
-    }
-
-    // Show fallback options after 2 seconds if still on page
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, [token, type]);
+    // No parameters provided - show default state
+    setLoading(false);
+  }, [redirect, errorParam, errorMessage, checkHash, tokenHash, success]);
 
   if (error) {
     return (
@@ -130,7 +178,9 @@ function ResetPasswordContent() {
                       <div>
                         <span>Copy and paste this link in your browser:</span>
                         <div className="mt-2 p-3 bg-white rounded-lg border border-him-purple-dark/20 font-mono text-sm break-all">
-                          him://auth/resetpasswordconfirm?token={token}&type=recovery
+                          {redirect ? decodeURIComponent(redirect) :
+                           tokenHash ? `him://auth/resetpasswordconfirm?token_hash=${tokenHash}&type=recovery` :
+                           'him://auth/resetpasswordconfirm'}
                         </div>
                       </div>
                     </li>
